@@ -148,7 +148,7 @@ $("#btn-addToCart").click(function () {
             addToCart();
             generateOrderID();
             loadCart();
-            // getTotal();
+            getTotal();
             $("#itemName,#price,#qtyOnHand,#qtyYouWant,#date,#cmbCustIDs,#cmbItemIDs,#customer,#name,#address,#number").val("")
         }
     }else{
@@ -246,6 +246,7 @@ function deleteData(index) {
     localStorage.setItem("cartList" , JSON.stringify(cartList));
 
     loadCart();
+    generateOrderID();
 }
 
 function UpdateData(index){
@@ -260,8 +261,26 @@ function UpdateData(index){
         cartList = JSON.parse(localStorage.getItem("cartList"));
     }
 
+    var peopleList;
+    if(localStorage.getItem("peopleList") == null){
+        peopleList = [];
+    }else{
+        peopleList = JSON.parse(localStorage.getItem("peopleList"))
+    }
+
+    var itemList;
+    if(localStorage.getItem("itemList") == null){
+        itemList = [];
+    }else{
+        itemList = JSON.parse(localStorage.getItem("itemList"));
+    }
+
     document.getElementById("idText").value = cartList[index].cartOID;
+    // document.getElementById("id").value = peopleList[index].id;
+    // document.getElementById("cmbItemIDs").value = peopleList[index].id;
     document.getElementById("name").value = cartList[index].cartCName;
+    document.getElementById("address").value = peopleList[index].address;
+    document.getElementById("number").value = peopleList[index].contact;
     document.getElementById("cmbItemIDs").value = cartList[index].cartICode;
     document.getElementById("itemName").value = cartList[index].cartIName;
     document.getElementById("price").value = cartList[index].cartIPrice;
@@ -272,6 +291,10 @@ function UpdateData(index){
         //if (validateForm() === true){
             cartList[index].cartOID = document.getElementById("idText").value;
             cartList[index].cartCName = document.getElementById("name").value;
+            // peopleList[index].id = document.getElementById("id").value;
+            // peopleList[index].id = document.getElementById("cmbItemIDs").value;
+            peopleList[index].address = document.getElementById("address").value;
+            peopleList[index].contact = document.getElementById("number").value;
             cartList[index].cartICode = document.getElementById("cmbItemIDs").value;
             cartList[index].cartIName = document.getElementById("itemName").value;
             cartList[index].cartIPrice = document.getElementById("price").value;
@@ -282,6 +305,9 @@ function UpdateData(index){
 
             document.getElementById("idText").value = " ";
             document.getElementById("name").value = " ";
+            // document.getElementById("cmbItemIDs").value = " ";
+            document.getElementById("address").value = " ";
+            document.getElementById("number").value = " ";
             document.getElementById("cmbItemIDs").value = " ";
             document.getElementById("itemName").value = " ";
             document.getElementById("price").value = " ";
@@ -299,30 +325,29 @@ function UpdateData(index){
 
 document.onload =loadCart();
 
-// function getTotal() {
-//     let tot = 0;
-//     $('#addToCartTable>tr').each(function () {
-//         tot = tot + parseFloat($($(this).children().get(6)).text());
-//         $('#total>span').text(tot).append('.00');
-//
-//         if($('#discount').val()===""){
-//
-//             $('#subtotal>span').text(tot).append('.00');
-//         }
-//     });
-//     t = tot;
-// }
+function getTotal() {
+    let tot = 0;
+    $('#addToCartTable>tr').each(function () {
+        tot = tot + parseFloat($($(this).children().get(6)).text());
+        $('#total>span').text(tot).append('.00');
 
-// $('#discount').on('keyup', function () {
-//     if ($('#discount').val() === '') {
-//         $('#subtotal>span').text('0.00');
-//     } else {
-//         let tot = parseFloat(t);
-//         let dis = tot/100 * parseFloat($('#discount').val());
-//
-//         $('#subtotal>span').text(tot - dis).append('.00');
-//     }
-// });
+        if($('#discount').val() === ""){
+            $('#subtotal>span').text(tot).append('.00');
+        }
+    });
+    t = tot;
+}
+
+$('#discount').on('keyup', function () {
+    if ($('#discount').val() === '') {
+        $('#subtotal>span').text('0.00');
+    } else {
+        let tot = parseFloat(t);
+        let dis = tot/100 * parseFloat($('#discount').val());
+
+        $('#subtotal>span').text(tot - dis).append('.00');
+    }
+});
 
 //
 // function placeOrder() {
@@ -336,6 +361,7 @@ document.onload =loadCart();
 //     }
 //
 // }
+
 // function saveOrder() {
 //     let oId=$("#txtOrderID").val();
 //     let cName=$("#txtPCustName").val();
@@ -347,6 +373,7 @@ document.onload =loadCart();
 //
 //     return orderDb.push(new OrderDTO(oId,cName,fullTotal,date));
 // }
+
 // $("#btn-purchase-order").click(function () {
 //     placeOrder();
 //     generateOrderID();
@@ -354,6 +381,7 @@ document.onload =loadCart();
 //     $('#addToCartTable').empty();
 //     $("#txtPItemName,#txtPPrice,#txtPItemQty,#txtOrderQty,#txtPCustSalary,#txtPCustName,#txtPCustAddress").val("")
 // });
+
 // $("#txtCash").on('keyup', function (eventOb) {
 //     if (eventOb.key == "Enter") {
 //         let cash=parseFloat($('#txtCash').val());
