@@ -1,35 +1,31 @@
-export class item{
+function OrderDTO(oId,custName,total,date) {
+    var __oID=oId;
+    var __custName=custName;
+    var __total=total;
+    var __orderDate=date;
 
-    constructor(code,name,qty,price) {
-        this.code = code;
-        this._name = name;
-        this._qty = qty;
-        this._price = price;
+    this.getOrderID=function () {
+        return __oID;
     }
-    get code(){
-        return "ID_" + this._code;
+    this.setOrderID=function (oID) {
+        __oID=oID;
     }
-    get name(){
-        return"Description_" + this._name;
+    this.getCusName=function () {
+        return __custName;
     }
-    get qty(){
-        return"Quantity_" + this._qty;
+    this.setCusName=function (cusID) {
+        __custName=cusID;
     }
-    get price(){
-        return"Unit-Price_" + this._price;
+    this.getOrderTotal=function () {
+        return __total;
     }
-
-    set code(code){
-        this._code=code;
+    this.setOrderTotal=function (total) {
+        __total=total;
     }
-    set name(name){
-        this._name=name ;
+    this.getOrderDate=function () {
+        return __orderDate;
     }
-
-    set qty(qty){
-        this._qty=qty ;
-    }
-    set price(price){
-        this._price=price ;
+    this.setOrderDate=function (date) {
+        __orderDate=date;
     }
 }

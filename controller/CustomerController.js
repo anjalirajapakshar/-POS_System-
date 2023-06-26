@@ -1,3 +1,27 @@
+// import {Customer} from "../model/Customer.js";
+//
+// export class CustomerController{
+//     constructor() {
+//         $('#Submit').click(this.handleSaveCustomer());
+//         $('#Update').click(this.handleUpdateCustomer());
+//     }
+//
+//     handleSaveCustomer(){
+//         console.log('handle save customer');
+//     }
+//
+//     handleUpdateCustomer(){
+//         console.log('handle update customer');
+//     }
+//
+//     // handleDeleteCustomer(){
+//     //     console.log('handle delete customer');
+//     // }
+// }
+
+// new CustomerController();
+
+
 function validateForm() {
     var id = document.getElementById("id").value;
     var name = document.getElementById("name").value;
@@ -101,7 +125,7 @@ function deleteData(index) {
 }
 
 //function to updata data from local storage
-function UpdateData(index) {
+function UpdateData(index){
     // submit button will hide and Update button will show for updating of Data in local storage
     document.getElementById("Submit").style.display = "none";
     document.getElementById("Update").style.display = "block";

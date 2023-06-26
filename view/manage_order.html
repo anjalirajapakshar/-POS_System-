@@ -67,7 +67,7 @@
 
         }
 
-        #custId{
+        #cmbCustIDs{
             width: 170px;
             display: inline;
             position: absolute;
@@ -82,7 +82,7 @@
 
         }
 
-        #salary{
+        #number{
             width: 170px;
             display: inline;
             position: absolute;
@@ -97,7 +97,7 @@
 
         }
 
-        #itemCode{
+        #cmbItemIDs{
             width: 200px;
             display: inline;
         }
@@ -106,6 +106,7 @@
             width: 200px;
             position: absolute;
             right: 20px;
+            top: 75px;
             display: inline;
         }
 
@@ -138,6 +139,16 @@
             right: 20px;
         }
 
+        .btn2{
+            width: 100px;
+            height: 37px;
+            border-radius: 5px;
+            position: absolute;
+            top: 310px;
+            right: 20px;
+            display: none;
+        }
+
         #cash{
             width: 120px;
             display: inline;
@@ -155,25 +166,36 @@
             width: 280px;
             position: absolute;
         }
-        
+
         .table{
             position: absolute;
             top: 468px;
         }
 
-        /*@media all and (max-width: 1350px) {*/
-        /*    #customform2{*/
-        /*        top: 486px;*/
-        /*        left: 0px;*/
-        /*    }*/
+        @media all and (max-width: 1350px) {
+            #customform2{
+                top: 486px;
+                left: 0px;
+            }
 
-        /*    .table{*/
-        /*        position: absolute;*/
-        /*        top: 886px;*/
+            #customform3{
+                top: 886px;
+                left: 0px;
+            }
 
-        /*    }*/
+            .table{
+                position: absolute;
+                top: 1296px;
 
-        /*}*/
+            }
+
+            /*.table{*/
+            /*    position: absolute;*/
+            /*    top: 886px;*/
+
+            /*}*/
+
+        }
 
         /*@media all and (max-width: 800px) {*/
         /*    #customform2{*/
@@ -220,19 +242,25 @@
         <form class="custom-form">
             <div class="navbar navbar-expand-sm navbar-dark bg-success" style="font-weight: bold; border-radius: 5px" > &nbsp;&nbsp;Invoice Details</div>
             <br>
-                <input type="text" class="form-control" id="idText" placeholder="order Id...">
+            <input type="text" class="form-control" id="idText" placeholder="order Id...">
 
-                <input type="date" class="form-control" id="date" placeholder="date...">
+            <input type="date" class="form-control" id="date" placeholder="date...">
 
-                <input type="text" class="form-control" id="customer" placeholder="customer...">
+            <input type="text" class="form-control" id="customer" placeholder="customer...">
 
-                <input type="text" class="form-control" id="custId" placeholder="customer Id...">
+            <div class="mb-3 input-group-sm col-12">
+                <select class="form-select " aria-label="Default select example" id="cmbCustIDs"
+                        placeholder="Select Customer">
+                    <option></option></select>
+            </div>
 
-                <input type="text" class="form-control" id="name" placeholder="cust name...">
+<!--            <input type="text" class="form-control" id="custId" placeholder="customer Id...">-->
 
-                <input type="text" class="form-control" id="salary" placeholder="salary...">
+            <input type="text" class="form-control" id="name" placeholder="cust name...">
 
-                <input type="text" class="form-control" id="address" placeholder="address...">
+            <input type="text" class="form-control" id="number" placeholder="number...">
+
+            <input type="text" class="form-control" id="address" placeholder="address...">
 
         </form>
     </section>
@@ -241,7 +269,13 @@
         <form class="custom-form" id="customform2">
             <div class="navbar navbar-expand-sm navbar-dark bg-success" style="font-weight: bold; border-radius: 5px" > &nbsp;&nbsp;Item Select</div>
             <br>
-            <input type="text" class="form-control" id="itemCode" placeholder="item code...">
+<!--            <input type="text" class="form-control" id="itemCode" placeholder="item code...">-->
+
+            <div class="mb-3 input-group-sm col-12">
+                <select class="form-select " aria-label="Default select example" id="cmbItemIDs">
+                    <option></option>
+                </select>
+            </div>
 
             <input type="text" class="form-control" id="itemName" placeholder="item name...">
 
@@ -251,38 +285,42 @@
 
             <input type="text" class="form-control" id="qtyYouWant" placeholder="qty You Want...">
 
-            <button type="submit" class="btn1 btn-success">Add Item</button>
+            <button id="btn-addToCart" class="btn1 btn-success">Add Item</button>
+            <button id="Update" class="btn2 btn-success" onclick="addToCart()">Update</button>
         </form>
     </section>
 
     <section class="sec03">
         <form class="custom-form" id="customform3">
             <br>
-            <h3>&nbsp;&nbsp;Total : 2500/= </h3>
+            <h3 id="total">&nbsp;&nbsp;Total : <span>0</span> </h3>
             <br>
-            <h3>&nbsp;&nbsp;SubTotal : 500/= </h3>
+            <h3 id="subtotal">&nbsp;&nbsp;SubTotal : <span>0</span> </h3>
             <br>
             <input type="text" class="form-control" id="cash" placeholder="cash...">
 
-            <input type="text" class="form-control" id="discount" placeholder="discount...">
+            <input type="text" class="form-control" id="discount" placeholder="discount(%)">
             <br>
             <br>
             <input type="text" class="form-control" id="balance" placeholder="balance...">
             <br><br>
-            <button type="submit" class="btn1 btn-success">Purchase</button>
+            <button type="submit" class="btn1 btn-success" id="btn-purchase-order">Purchase</button>
         </form>
     </section>
 
     <section class="row mt-5">
         <div class="col-12">
-            <table class="table table-success table-bordered">
+            <table class="table table-success table-bordered" id="addToCartTable">
                 <thead>
                 <tr>
-                    <th scope="col">Item Code</th>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Item Id</th>
                     <th scope="col">Item Name</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Item Price</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Total</th>
+                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
@@ -291,5 +329,9 @@
     </section>
 </div>
 
+
+<script src="../assests/lib/jQuery/jquery-3.6.4.min.js"></script>
+
+<script src="../controller/OrderControllerr.js"></script>
 </body>
 </html>

@@ -1,35 +1,31 @@
-export  class customer{
+function CustomerDTO(id,name,address,number) {
+    var __id=id;
+    var __name=name;
+    var __address=address;
+    var __number=number;
 
-    constructor(id,name,address,contact) {
-        this._id = id;
-        this._name = name;
-        this._address = address;
-        this._contact = contact;
+    this.getCustomerID=function () {
+        return __id;
     }
-
-    get id(){
-        return "ID_" + this._id;
+    this.setCustomerID=function (idPara) {
+        __id=idPara;
     }
-    get name(){
-        return"Name_" + this._name;
+    this.getCustomerName=function () {
+        return __name;
     }
-    get address(){
-        return"Address_" + this._address;
+    this.setCustomerName=function (namePara) {
+        __name=namePara;
     }
-    get contact(){
-        return"Contact" + this._contact;
+    this.getCustomerAddress=function () {
+        return __address;
     }
-    set id(id){
-        this._id=id * 100;
+    this.setCustomerAddress=function (addressPara) {
+        __address=addressPara;
     }
-    set name(name){
-        this._name=name ;
+    this.getCustomerNumber=function () {
+        return __number;
     }
-    set address(address){
-        this._address=address ;
+    this.setCustomeNumber=function (numberPara) {
+        __number=numberPara;
     }
-    set contact(contact){
-        this._contact=contact ;
-    }
-
 }

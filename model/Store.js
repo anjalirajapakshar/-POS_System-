@@ -1,35 +1,31 @@
-export class item{
+function ItemDTO(itemCode,itemName,itemQTY,unitPrice) {
+    var __itemCode=itemCode;
+    var __itemName=itemName;
+    var __itemQty=itemQTY;
+    var __unitPrice=unitPrice;
 
-    constructor(code,name,quantity,price) {
-        this._code = code;
-        this._name = name;
-        this._quantity = quantity;
-        this._price = price;
+    this.getItemCode=function(){
+        return __itemCode;
     }
-    get code(){
-        return "code_" + this._code;
+    this.setItemCode=function (code) {
+        __itemCode=code;
     }
-    get name(){
-        return"name_" + this._name;
+    this.getItemName=function(){
+        return __itemName;
     }
-    get qty(){
-        return"quantity_" + this._quantity;
+    this.setItemName=function (name) {
+        __itemName=name;
     }
-    get price(){
-        return"price_" + this._price;
+    this.getItemQTY=function () {
+        return __itemQty;
     }
-
-    set code(code){
-        this._code=code;
+    this.setItemQTY=function (qty) {
+        __itemQty=qty;
     }
-    set name(name){
-        this._name=name ;
+    this.getUnitPrice=function () {
+        return __unitPrice;
     }
-
-    set quantity(quantity){
-        this._quantity=quantity ;
-    }
-    set price(price){
-        this._price=price ;
+    this.setUnitPrice=function (price) {
+        __unitPrice=price;
     }
 }
